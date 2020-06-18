@@ -21,6 +21,7 @@ const App = () => {
 
   return (
     <div className="App">
+      List of Products
       <ul>
         {products.map(p => (
           <li key={p.id}>
