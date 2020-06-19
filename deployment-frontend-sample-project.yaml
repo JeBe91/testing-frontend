@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    alpha.image.policy.openshift.io/resolve-names: '*'
+    app.openshift.io/connects-to: backend-sample-project
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/JeBe91/testing-frontend.git
+    deployment.kubernetes.io/revision: "4"
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"frontend-sample-project:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"frontend-sample-project\")].image"}]'
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2020-06-18T13:08:09Z"
+  generation: 9
+  labels:
+    app: frontend-sample-project
+    app.kubernetes.io/component: frontend-sample-project
+    app.kubernetes.io/instance: frontend-sample-project
+    app.kubernetes.io/part-of: testing-backend-git-app
+  name: frontend-sample-project
+  namespace: dl-f73-sandbox
+  resourceVersion: "42627136"
+  selfLink: /apis/apps/v1/namespaces/dl-f73-sandbox/deployments/frontend-sample-project
+  uid: 5742c524-37d9-4b04-b40a-41681451d220
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: frontend-sample-project
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: frontend-sample-project
+        deploymentconfig: frontend-sample-project
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/dl-f73-sandbox/frontend-sample-project@sha256:c3a1bbb25fca4b1651aa1e3fcc138ee583b5a8bbd58b60a9d98ab967d0830132
+        imagePullPolicy: Always
+        name: frontend-sample-project
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2020-06-18T13:08:10Z"
+    lastUpdateTime: "2020-06-18T14:32:44Z"
+    message: ReplicaSet "frontend-sample-project-77779489" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2020-06-18T21:42:57Z"
+    lastUpdateTime: "2020-06-18T21:42:57Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  observedGeneration: 9
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
